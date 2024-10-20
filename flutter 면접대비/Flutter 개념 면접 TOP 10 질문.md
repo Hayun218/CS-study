@@ -1,6 +1,5 @@
 작성일시: 24.10.20 (Sun)
 
-
 1. StatelessWidget과 StatefulWidget의 차이에 대해 설명해 주세요.
    **StatelessWidget**과 **StatefulWidget**은 둘 다 Flutter의 UI를 만드는 데 사용되지만, **상태 관리** 방식에서 차이가 있습니다. StatelessWidget은 내부적으로 상태를 변경할 수 없는 위젯입니다. 즉, 화면이 처음 빌드된 이후에는 데이터나 UI가 변하지 않습니다. 반면, StatefulWidget은 내부적으로 상태를 관리할 수 있으며, `setState` 메서드를 통해 상태가 변경되면 해당 위젯의 UI를 다시 렌더링할 수 있습니다. 상태 변화가 필요한 경우 StatefulWidget을 사용해야 합니다.
    
