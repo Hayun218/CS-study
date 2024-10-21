@@ -4,6 +4,7 @@
 
    **StatelessWidget**과 **StatefulWidget**은 둘 다 Flutter의 UI를 만드는 데 사용되지만, **상태 관리** 방식에서 차이가 있습니다. StatelessWidget은 내부적으로 상태를 변경할 수 없는 위젯입니다. 즉, 화면이 처음 빌드된 이후에는 데이터나 UI가 변하지 않습니다. 반면, StatefulWidget은 내부적으로 상태를 관리할 수 있으며, `setState` 메서드를 통해 상태가 변경되면 해당 위젯의 UI를 다시 렌더링할 수 있습니다. 상태 변화가 필요한 경우 StatefulWidget을 사용해야 합니다.
    
+   
 3. BuildContext에 대해 설명해주세요.
 
    **BuildContext**는 위젯 트리 내에서 현재 위젯의 위치와 관련된 정보를 제공합니다. Flutter는 트리 구조로 위젯을 구성하고, **BuildContext**를 통해 부모와 자식 간의 관계를 유지하고 위젯 트리 내에서 위젯 간에 상호작용이 가능하도록 합니다.
