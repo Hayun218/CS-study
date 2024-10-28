@@ -1,20 +1,64 @@
 작성일시:
 
 1. **Swift에서 옵셔널(Optional)이란 무엇이며, 언제 사용해야 하나요?**
-    
-    - 옵셔널 바인딩과 강제 언래핑의 차이점은 무엇인가요?
-    - 옵셔널 체이닝의 동작 원리는 무엇이며, 어떻게 사용하나요?
-    - 암시적 언래핑 옵셔널(Implicitly Unwrapped Optional)은 어떤 경우에 사용해야 하나요?
+
+    **옵셔널**은 값이 존재할 수도 있고, 없을 수도 있는 변수의 유형입니다. 
+    옵셔널을 사용하면 값이 없는 상태를 안전하게 처리할 수 있습니다.
+
+	1-1. 옵셔널 바인딩과 강제 언래핑의 차이점은 무엇인가요?
+     **옵셔널 바인딩**은 `if let` 또는 `guard let`을 사용해 안전하게 값을 추출하고, **강제 언래핑**은 `!`를 사용해 값이 반드시 존재한다고 가정하는 방식입니다.
+
+    1-2. 옵셔널 체이닝의 동작 원리는 무엇이며, 어떻게 사용하나요?
+      **옵셔널 체이닝**은 여러 옵셔널 객체를 연결해 값이 존재할 때만 접근을 허용하는 방식입니다.
+
+    1-3. 암시적 언래핑 옵셔널(Implicitly Unwrapped Optional)은 어떤 경우에 사용해야 하나요?
+      **암시적 언래핑 옵셔널**은 항상 값이 있다고 보장할 때 사용하는 옵셔널입니다.
+
+
 2. **iOS 앱의 생명주기(App Life Cycle)에 대해 설명해주세요.**
+
+	iOS 앱의 생명주기(App Life Cycle)는 앱이 실행되면서 겪는 상태 변화와 그에 따른 동작들을 관리하는 과정을 말합니다. 앱의 상태에 따라 앱이 활성화, 비활성화, 종료되는 등의 상황을 처리할 수 있습니다.
+  
+    2-1. 앱의 각 상태(`Not Running`, `Inactive`, `Active`, `Background`, `Suspended`)에서 가능한 작업은 무엇인가요?
     
-    - 앱의 각 상태(`Not Running`, `Inactive`, `Active`, `Background`, `Suspended`)에서 가능한 작업은 무엇인가요?
-    - 상태 변화에 따라 호출되는 `AppDelegate` 또는 `SceneDelegate` 메서드는 무엇인가요?
-    - 백그라운드에서 작업을 완료하기 위한 방법은 어떤 것이 있나요?
+    - **Not Running**:
+	    - 앱이 실행되지 않은 상태 또는 시스템에 의해 종료된 상태입니다.
+	    - 이 상태에서는 앱이 메모리에 존재하지 않으므로, 어떠한 작업도 수행할 수 없습니다.
+	- **Inactive**:
+	    - 앱이 화면에 표시되지만 사용자와 상호작용할 수 없는 상태입니다. 전화 수신 등으로 인해 잠시 중단되거나, 다른 알림이 활성화된 상태일 수 있습니다.
+	    - 일반적으로 짧은 시간 동안 유지되며, 상태가 **Active** 또는 **Background**로 전환되기 전에 이 상태를 거칩니다.
+	    - 이 상태에서는 거의 아무 작업도 수행하지 않으며, 주로 상태 전환을 준비하는 데 사용됩니다.
+	- **Active**:
+	    - 앱이 화면에 표시되고, 사용자와의 상호작용이 가능한 상태입니다.
+	    - 대부분의 앱 로직이 이 상태에서 실행됩니다.
+	    - 애니메이션 처리, 터치 이벤트 처리 등 사용자와의 실시간 상호작용이 이루어집니다.
+	- **Background**:
+	    - 앱이 사용자에게 보이지 않고 백그라운드에서 실행 중인 상태입니다. 앱이 이 상태에서는 일정한 작업(예: 파일 저장, 데이터 다운로드)을 수행할 수 있습니다.
+	    - iOS는 특정 작업만 허용하며, 대부분의 경우 이 상태로 전환된 후 일정 시간 내에 작업을 완료하고 **Suspended** 상태로 전환됩니다.
+	- **Suspended**:
+	    - 앱이 백그라운드에 있지만, 코드가 실행되지 않는 상태입니다. 메모리만 차지하고 있으며, 필요할 경우 시스템에 의해 종료될 수 있습니다.
+	    - 앱이 일시 정지된 상태이므로 새로운 작업을 수행할 수 없지만, 메모리에 유지되어 빠르게 재개될 수 있습니다.
+
+    2-2. 상태 변화에 따라 호출되는 `AppDelegate` 또는 `SceneDelegate` 메서드는 무엇인가요?
+    - **`didFinishLaunchingWithOptions`**: 앱 실행 후 초기화 작업.
+	- **`applicationDidBecomeActive`/`sceneDidBecomeActive`**: 앱이 활성화될 때 호출.
+	- **`applicationWillResignActive`/`sceneWillResignActive`**: 앱이 비활성화될 때 호출.
+	- **`applicationDidEnterBackground`/`sceneDidEnterBackground`**: 백그라운드로 전환 시 호출.
+	- **`applicationWillEnterForeground`/`sceneWillEnterForeground`**: 백그라운드에서 포그라운드로 전환 시 호출.
+	- **`applicationWillTerminate`**: 앱 종료 전 호출.
+
+    2-3. 백그라운드에서 작업을 완료하기 위한 방법은 어떤 것이 있나요?
+    - **`beginBackgroundTask`**: 백그라운드에서 일정 시간 작업 수행 가능.
+	- **Background Fetch**: 시스템이 주기적으로 앱을 깨워 작업 처리.
+	- **Silent Notification**: 푸시 알림을 통해 백그라운드에서 작업 실행.
+
+
 3. **Auto Layout을 사용하는 이유와 장점은 무엇인가요?**
     
     - 제약 조건(Constraints)의 우선순위(Priority)는 어떻게 동작하나요?
     - Intrinsic Content Size란 무엇이며, 어떻게 활용되나요?
     - Ambiguous Layout과 Unsatisfiable Constraints는 무엇이며, 어떻게 해결하나요?
+
 4. **Swift에서 클로저(Closure)란 무엇이며, 어떻게 사용하나요?**
     
     - 클로저의 캡처(Capture) 기능은 무엇인가요?
