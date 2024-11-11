@@ -196,15 +196,18 @@ UIView.animate(withDuration: 0.3) {
     - `throws`, `try`, `catch` 키워드의 사용 방법은 무엇인가요?
     - 옵셔널을 사용한 에러 처리와 `do-catch`를 사용하는 에러 처리의 차이는 무엇인가요?
     - 에러를 전파하는 방법은 무엇인가요?
+
 16. **메모리 관리에서 강한 참조(Strong Reference)와 약한 참조(Weak Reference)의 차이점은 무엇인가요?**
     
     - 순환 참조(Retain Cycle)가 발생하는 경우와 해결 방법은 무엇인가요?
     - 클로저에서 `[weak self]`와 `[unowned self]`의 차이는 무엇인가요?
+
 17. **iOS 앱에서 Multi-threading을 구현하는 방법은 무엇인가요?**
     
     - `DispatchQueue`와 `OperationQueue`의 차이점은 무엇인가요?
     - 동시성 프로그래밍에서 Race Condition을 방지하는 방법은 무엇인가요?
     - 메인 스레드에서 UI 업데이트를 해야 하는 이유는 무엇인가요?
+
 18. **UIKit에서 TableView와 CollectionView의 차이점은 무엇인가요?**
     
     - 셀(Cell)의 재사용(Reusability)은 어떻게 구현되나요?
