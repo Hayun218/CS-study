@@ -54,13 +54,48 @@
 
 
 3. **Auto Layout을 사용하는 이유와 장점은 무엇인가요?**
+
+    Auto Layout은 다양한 화면 크기와 방향에 대응하기 위한 UI 레이아웃 시스템입니다.
+	
+	**주요 장점:**
+	1. 다양한 디바이스 크기와 방향에 동적으로 대응
+	2. 국제화(Internationalization) 대응 - 다양한 언어의 텍스트 길이 변화에 자동 적응
+	3. 선언적 방식으로 뷰 관계를 정의하여 유지보수성 향상
+	4. 디바이스 회전 및 동적 콘텐츠 변화에 자동 대응
+
+	3-1. 제약 조건(Constraints)의 우선순위(Priority)는 어떻게 동작하나요?
+	
+	- 제약 조건의 우선순위(Priority)는 1부터 1000 사이의 값을 지님
+		- 1000은 'Required' 반드시 만족해야 하는 제약조건을 의미하며 기본값
+		- 750은 'High'
+		- 500은 'Medium'
+		- 250은 'Low' 우선순위
+	- ex:
+		-  Width ≥ 100 (Priority 1000): 너비는 반드시 100 이상이어야 함
+		- Width = 150 (Priority 750): 가능하면 너비를 150으로 설정
+	
+
+    3-2.  Intrinsic Content Size란 무엇이며, 어떻게 활용되나요?
+	 
+	- 정의: 뷰의 콘텐츠를 표시하는데 필요한 기본 크기
+	- 컴포넌트별 특성:
+	    - UILabel: 텍스트 내용과 폰트에 따른 크기
+	    - UIButton: 타이틀과 이미지에 따른 크기
+	    - UIImageView: 이미지 크기
+	- Content Hugging Priority와 Compression Resistance Priority로 동작 제어 가능
+
+    3-3. Ambiguous Layout과 Unsatisfiable Constraints는 무엇이며, 어떻게 해결하나요?
     
-    - 제약 조건(Constraints)의 우선순위(Priority)는 어떻게 동작하나요?
-    - Intrinsic Content Size란 무엇이며, 어떻게 활용되나요?
-    - Ambiguous Layout과 Unsatisfiable Constraints는 무엇이며, 어떻게 해결하나요?
+    **Ambiguous Layout:**
+	- 제약 조건이 부족하여 뷰의 위치나 크기가 불명확한 상태
+	- 해결방법: 필요한 제약 조건을 추가하여 해결
+	  
+	**Unsatisfiable Constraints:**
+	- 제약 조건 간 충돌로 인해 동시에 만족할 수 없는 상태
+	- 해결방법: 충돌하는 제약 조건 제거 또는 우선순위 조정 필요
 
 
-4. **Swift에서 클로저(Closure)란 무엇이며, 어떻게 사용하나요?**
+5. **Swift에서 클로저(Closure)란 무엇이며, 어떻게 사용하나요?**
 
 	클로저(Closure)는 Swift에서 **독립적인 코드 블록**으로, 함수와 유사하지만 더 경량화된 문법을 가진 기능입니다. 이를 코드의 캡슐화와 재사용성을 높이는 데 활용합니다.
 
@@ -122,26 +157,81 @@ UIView.animate(withDuration: 0.3) {
 
 
 6. **Swift의 기본 데이터 타입과 컬렉션(Collection) 타입에는 어떤 것들이 있나요?**
-    
-    - 값 타입(Value Type)과 참조 타입(Reference Type)의 차이점은 무엇인가요?
-    - 구조체(Struct)와 클래스(Class)의 사용 시기는 어떻게 구분하나요?
-    - 열거형(Enum)의 원시값(Raw Value)과 연관값(Associated Value)은 무엇인가요?
-      
+
+    기본 타입
+	- Int, Double, String, Bool, Character
+	 컬렉션
+	 - Array, Dictionary, Set
+
+    6-1. 값 타입(Value Type)과 참조 타입(Reference Type)의 차이점은 무엇인가요?
+	- 값 타입: 데이터 복사, 스택 메모리 사용, 상속 불가, 멀티스레드 환경에서 안전 (Struct, Enum)
+	- 참조 타입: 주소 전달, 힙 메리 사요으 상속 가능, ARC로 메모리 관리 (Class)
+
+    6-2. 구조체(Struct)와 클래스(Class)의 사용 시기는 어떻게 구분하나요?
+    - Struct: 단순 데이터 캡슐화 (Point, Size)
+	- Class: 상속/참조 필요시 (ViewController)
+
+    6-3. 열거형(Enum)의 원시값(Raw Value)과 연관값(Associated Value)은 무엇인가요?
+    - 원시값: 컴파일 시점, 고정값
+    - 연관값: 런타임 시점, 동적 데이터
+
+
 7. **Xcode에서 디버깅 시 자주 사용하는 기능은 무엇인가요?**
+
+    중단점, LLDB 명령어, 디버그 내비게이터, Debug Memory Graph,,
+
+    7-1.  중단점(Breakpoint)의 종류와 활용 방법을 설명해주세요.
     
-    - 중단점(Breakpoint)의 종류와 활용 방법을 설명해주세요.
-    - LLDB 콘솔에서 유용한 명령어는 어떤 것이 있나요?
-      
+	- 일반: 특정 라인 중단
+	- 조건부: 조건 만족시 중단
+	- 예외: 예외 발생시 중단
+	- 심볼릭: 메서드 호출 시 중단
+
+    7-2. LLDB 콘솔에서 유용한 명령어는 어떤 것이 있나요?
+    
+    - **po: 객체 출력 (print object)**
+	- **p: 변수 값 출력**
+	- **bt: 백트레이스 출력**
+	- frame variable: 현재 프레임의 변수들 출력
+	- expression: 런타임에 값 변경
+	- continue: 실행 계속
+	- step over: 현재 라인 실행
+	- step into: 함수 내부로 진입
+	- step out: 현재 함수에서 빠져나감
+
+
 8. **iOS 앱에서 데이터를 저장하는 방법에는 어떤 것들이 있나요?**
     
     - `UserDefaults`의 사용 시 주의할 점은 무엇인가요?
     - Keychain은 어떤 데이터를 저장하기에 적합한가요?
     - Core Data와 SQLite의 차이점은 무엇이며, 각각 언제 사용하면 좋나요?
+
+
 9. **Swift에서 프로토콜(Protocol)이란 무엇이며, 어떻게 활용하나요?**
+
+	- 특정 역할을 하기 위한 메서드, 프로퍼티, 기타 요구사항의 청사진
+	- 클래스, 구조체, 열거형이 채택하여 구현 가능
+	- 다중 채택 가능 (다중 상속 효과)
+
+    9-1. 프로토콜의 요구사항은 무엇인가요?
     
-    - 프로토콜의 요구사항은 무엇인가요?
-    - 프로토콜 확장(Protocol Extension)을 사용하는 이유는 무엇인가요?
-    - 프로토콜 지향 프로그래밍(Protocol-Oriented Programming)의 장점은 무엇인가요?
+    - 프로퍼티 요구사항: get, set 명시
+	- 메서드 요구사항: 함수 선언부 정의
+	- 이니셜라이저 요구사항: 초기화 방법 정의
+
+    9-2. 프로토콜 확장(Protocol Extension)을 사용하는 이유는 무엇인가요?
+    - 기본 구현 제공 가능
+	- 프로토콜 채택 시 자동으로 기능 추가
+	- 코드 중복 감소
+
+    9-3. 프로토콜 지향 프로그래밍(Protocol-Oriented Programming)의 장점은 무엇인가요?
+	-  수평적 확장 용이
+	- 타입 간 코드 재사용성 증가
+	- 테스트 용이성 (의존성 주입)
+	- 유연한 타입 관계 설계
+	- 상속의 한계 극복
+
+
 10. **Swift의 접근 제어자(Access Control Levels)에 대해 설명해주세요.**
     
     - `open`과 `public`의 차이점은 무엇인가요?
